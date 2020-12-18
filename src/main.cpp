@@ -14,14 +14,14 @@ int main() {
     // Initialize variables
     player _player;
     event current_event;
-    status new_status;
+    status new_status = status::no_status;
     unsigned n_events = 0;
     unsigned outcome_index = 0;
 
     // TODO: Show start of the game text and menu
 
     // Main loop
-    while(!_player.lose() && _player.get_status()!=status::end) {
+    while(!_player.lose() && new_status!=status::end) {
         // Show player stats
         cout<<"-------------------- CURRENT STATS --------------------\n";
         cout<<_player.show();
@@ -29,9 +29,12 @@ int main() {
 
         // TODO: Event pool based on stats
         vector<event> pool = create_pool(n_events,_player.get_status(),_player.get_stats());
-        pair<stat_set,operation> current_status_mods = _player.get_modifiers();
-        for (size_t i=0;i<pool.size();i++)
-            pool[i].set_modifiers(current_status_mods.first,current_status_mods.second);
+        vector<pair<stat_set,operation> > current_status_mods = _player.get_modifiers(); 
+        for (size_t j=0;j<current_status_mods.size();j++)
+            for (size_t i=0;i<pool.size();i++) {
+                pair<stat_set,operation> mods = current_status_mods[j];
+                pool[i].set_modifiers(mods.first,mods.second);
+            }
 
         // Play the event
         current_event = choose_event(pool);

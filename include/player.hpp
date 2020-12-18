@@ -6,6 +6,7 @@
 
 #include<utility>
 #include<vector>
+#include<set>
 #include"event.hpp"
 #include"stats.hpp"
 
@@ -22,10 +23,10 @@ public:
      */
     player();
     /** 
-     * @brief Get the modifier to the stats based on the status
-     * @return The pair modifier-operation
+     * @brief Get the modifiers to the stats based on the status
+     * @return The list of pairs modifier-operation
      */
-    std::pair<stat_set,operation> get_modifiers() const;
+    std::vector<std::pair<stat_set,operation> > get_modifiers() const;
     /**
      * @brief Shows a description of the player
      * @return The description of the player
@@ -40,10 +41,11 @@ public:
      * @brief Get the current player's status
      * @return The player's status when the function is called
      */
-    status get_status() const;
+    std::set<status> get_status() const;
     /**
      * @brief Change the player status
      * @param s New status
+     * @todo Set the behaviour for reverting statuses
      */
     void set_status(status s);
     /**
@@ -59,7 +61,7 @@ public:
     bool lose() const;
 private:
     stat_set stats;                     ///< Player stats
-    status current_status;              ///< Player status
+    std::set<status> current_status;              ///< Player status
 };
 
 #endif

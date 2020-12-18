@@ -56,9 +56,10 @@ struct stat_set {
  */
 enum class status {
     exhausted,      ///< Hunger x2
+    revert_exh,     ///< Removes exhausted
     paranoid,       ///< Sanity -2
     wet,            ///< Cold +1
-    revert_status,  ///< Removes status
+    revert_wet,     ///< Removes wet
     end,            ///< Ends the game
     no_status       ///< Default value
 };

@@ -7,6 +7,7 @@
 #include<algorithm>
 #include<random>
 #include<chrono>
+#include<set>
 #include"event.hpp"
 #include"stats.hpp"
 
@@ -28,6 +29,6 @@ event choose_event(std::vector<event>& v);
  * @return The pool of possible events to choose from
  * @todo Add different pools
  */
-std::vector<event> create_pool(unsigned i,status s,stat_set st);
+std::vector<event> create_pool(unsigned i,const std::set<status>& s,stat_set st);
 
 #endif

@@ -52,7 +52,7 @@ std::pair<stat_set,operation> set_modifiers(const status s) {
             break;
         // Exhausted
         case status::exhausted:
-            ans.first = stat_set(0,0,0,2);
+            ans.first = stat_set(1,1,1,2);
             ans.second = operation::mult;
             break;
         // Paranoid

@@ -20,14 +20,21 @@ event choose_event(vector<event>& v) {
     return v[distribution(generator)];
 }
 
-std::vector<event> create_pool(unsigned i,status s,stat_set st) {
-    std::vector<event> ans;
-    if (i<5)  
-        ans = pool.common;
-    else {
-        ans = pool.common;
+std::vector<event> create_pool(unsigned i,const set<status>& s,stat_set st) {
+    std::vector<event> ans = pool.common;
+    if (i>20)
         ans.push_back(pool.find_dog);
-    }
+    for (auto it=s.begin();it!=s.end();it++)
+        switch(*it) {
+            default:
+                break;
+            case status::wet:
+                ans.insert(ans.end(),pool.wet.begin(),pool.wet.end());
+                break;
+            case status::exhausted:
+                ans.insert(ans.end(),pool.exhausted.begin(),pool.exhausted.end());
+                break;
+        }
     
     return ans;
 }
